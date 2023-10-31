@@ -1,10 +1,12 @@
 import './App.css';
 import './react-dadata.css';
-import BasicForm from './components/BasicForm';
+import SuggestionInput from './components/SuggestionInput';
 
 function App() {
   return (
-    <BasicForm />
+    <div>
+      <SuggestionInput />
+    </div>
   );
 }
 
