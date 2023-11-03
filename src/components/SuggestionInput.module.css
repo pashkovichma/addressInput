@@ -1,0 +1,64 @@
+.container {
+  padding: 50px;
+}
+
+ .wrapper {
+  height: 90px;
+  width: 70%;
+  margin: 20px;
+  box-shadow: 0px 4px 0px #141414;
+  line-height: 26px;
+  font-size: 22px;
+  border-color: rgb(20 20 20);
+  border-radius: 32px;
+  overflow: hidden;
+  place-items: center;
+  display: flex;
+  box-sizing: border-box;
+  border: 2px solid rgb(20 20 20);
+  color: rgb(20 20 20);
+  font-family: Matter,sans-serif;
+  background-color: rgb(249 250 251);
+}
+
+.address {
+  padding-left: 0;
+  padding-right: 0;
+  min-width: 209px;
+  font-family: var(--font-cal),ui-serif,Georgia,Cambria,"Times New Roman",Times,serif;
+  background-color: rgb(225 225 225);
+  border-color: rgb(20 20 20);
+  border-style: dashed;
+  border-left:none;
+  border-right-width: 2px;
+  justify-content: center;
+  place-items: center;
+  height: 100%;
+  display: flex;
+}
+
+.suggestionClassName {
+  padding: 30px;
+  flex: auto;
+  overflow: visible;
+}
+
+.suggestionClassName input {
+  width: 100%;
+  border: none;
+  background-color: rgb(249 250 251);
+}
+
+.suggestionClassName input:focus {
+  box-shadow: 0 0 0 0;
+}
+
+
+.suggestionClassName ul {
+  overflow: visible; 
+  position: absolute; 
+  top: 140px; 
+  left: 300px;
+  width: 500px;
+}
+  

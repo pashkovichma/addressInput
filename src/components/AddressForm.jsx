@@ -1,5 +1,7 @@
 import useInput from '../hooks/use-input';
 
+import styles from './AddressForm.module.css';
+
 function AddressForm({value}){
 
   const isNotEmpty = (value) => value.trim() !== '';
@@ -85,24 +87,12 @@ function AddressForm({value}){
     formIsValid = true;
   }
 
-  const countryClasses = countryHasError ? 'form-control invalid' : 'form-control';
-  const cityClasses = cityHasError ? 'form-control invalid' : 'form-control';
-  const postalCodeClasses = postalCodeHasError ? 'form-control invalid' : 'form-control';
-  const streetClasses = streetHasError ? 'form-control invalid' : 'form-control';
-  const houseClasses = houseHasError ? 'form-control invalid' : 'form-control';
-  const blockClasses = blockHasError ? 'form-control invalid' : 'form-control';
-  const entranceClasses = entranceHasError ? 'form-control invalid' : 'form-control';
-  const floorClasses = floorHasError ? 'form-control invalid' : 'form-control';
-  const flatClasses = flatHasError ? 'form-control invalid' : 'form-control';
-  const intercomClasses = intercomHasError ? 'form-control invalid' : 'form-control';
-
   const submitHandler = (event) => {
     event.preventDefault();
 
     if (!formIsValid) {
       return;
     }
-
 
     resetCountry();
     resetCity();
@@ -119,8 +109,8 @@ function AddressForm({value}){
     <form 
       onSubmit={submitHandler} 
     >
-      <div className='control-group'>
-        <div className={countryClasses}>
+      <div>
+        <div className={`${styles.formControl} ${countryHasError ? styles.invalid : ''}`}>
           <input
             placeholder="Страна"
             type='text'
@@ -128,10 +118,11 @@ function AddressForm({value}){
             defaultValue={value?.data.country || countryValue}
             onChange={countryChangeHandler}
             onBlur={countryBlurHandler}
+            //onFocus={countryFocusHandler}
+            className={styles.formInput}
           />
-          {countryHasError && <p className="error-text">Пожалуйста, укажите страну.</p>}
         </div>
-        <div className={cityClasses}>
+        <div className={`${styles.formControl} ${cityHasError ? styles.invalid : ''}`}>
           <input
             placeholder="Город"
             type='text'
@@ -139,10 +130,10 @@ function AddressForm({value}){
             defaultValue={value?.data.city || cityValue}
             onChange={cityChangeHandler}
             onBlur={cityBlurHandler}
+            className={styles.formInput}
           />
-          {cityHasError && <p className="error-text">Пожалуйста, укажите город.</p>}
         </div>
-        <div className={postalCodeClasses}>
+        <div className={`${styles.formControl} ${postalCodeHasError ? styles.invalid : ''}`}>
           <input
             placeholder="Индеск"
             type='text'
@@ -150,10 +141,10 @@ function AddressForm({value}){
             defaultValue={value?.data.postal_code || postalCodeValue}
             onChange={postalCodeChangeHandler}
             onBlur={postalCodeBlurHandler}
+            className={styles.formInput}
           />
-          {postalCodeHasError && <p className="error-text">Пожалуйста, укажите индекс.</p>}
         </div>
-        <div className={streetClasses}>
+        <div className={`${styles.formControl} ${streetHasError ? styles.invalid : ''}`}>
           <input
             placeholder="Улица"
             type='text'
@@ -161,10 +152,10 @@ function AddressForm({value}){
             defaultValue={value?.data.street || streetValue}
             onChange={streetChangeHandler}
             onBlur={streetBlurHandler}
+            className={styles.formInput}
           />
-          {streetHasError && <p className="error-text">Пожалуйста, укажите индекс.</p>}
         </div>
-        <div className={houseClasses}>
+        <div className={`${styles.formControl} ${houseHasError ? styles.invalid : ''}`}>
           <input
             placeholder="Дом"
             type='text'
@@ -172,10 +163,10 @@ function AddressForm({value}){
             defaultValue={value?.data.house || houseValue}
             onChange={houseChangeHandler}
             onBlur={houseBlurHandler}
+            className={styles.formInput}
           />
-          {houseHasError && <p className="error-text">Пожалуйста, укажите дом.</p>}
         </div>
-        <div className={blockClasses}>
+        <div className={styles.formControl}>
           <input
             placeholder="Корпус/ строение"
             type='text'
@@ -183,9 +174,10 @@ function AddressForm({value}){
             defaultValue={value?.data.block || blockValue}
             onChange={blockChangeHandler}
             onBlur={blockBlurHandler}
+            className={styles.formInput}
           />
         </div>
-        <div className={entranceClasses}>
+        <div className={styles.formControl}>
           <input
             placeholder="Подъезд"
             type='text'
@@ -193,9 +185,10 @@ function AddressForm({value}){
             defaultValue={entranceValue}
             onChange={entranceChangeHandler}
             onBlur={entranceBlurHandler}
+            className={styles.formInput}
           />
         </div>
-        <div className={floorClasses}>
+        <div className={styles.formControl}>
           <input
             placeholder="Этаж"
             type='text'
@@ -203,9 +196,10 @@ function AddressForm({value}){
             defaultValue={floorValue}
             onChange={floorChangeHandler}
             onBlur={floorBlurHandler}
+            className={styles.formInput}
           />
         </div>
-        <div className={flatClasses}>
+        <div className={styles.formControl}>
           <input
             placeholder="Квартира"
             type='text'
@@ -213,9 +207,10 @@ function AddressForm({value}){
             defaultValue={value?.data.flat || flatValue}
             onChange={flatChangeHandler}
             onBlur={flatBlurHandler}
+            className={styles.formInput}
           />
         </div>
-        <div className={intercomClasses}>
+        <div className={styles.formControl}>
           <input
             placeholder="Домофон"
             type='text'
@@ -223,10 +218,11 @@ function AddressForm({value}){
             defaultValue={intercomValue}
             onChange={intercomChangeHandler}
             onBlur={intercomBlurHandler}
+            className={styles.formInput}
           />
         </div>
       </div>
-      <div className='form-actions'>
+      <div>
         <button disabled={!formIsValid}>Submit</button>
       </div>
     </form>

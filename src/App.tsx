@@ -4,9 +4,7 @@ import SuggestionInput from './components/SuggestionInput';
 
 function App() {
   return (
-    <div>
-      <SuggestionInput />
-    </div>
+    <SuggestionInput />
   );
 }
 
