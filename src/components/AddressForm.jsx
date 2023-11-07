@@ -2,7 +2,10 @@ import useInput from '../hooks/use-input';
 
 import styles from './AddressForm.module.css';
 
-function AddressForm({value}){
+function AddressForm({ value }, { onChange }) {
+  const handleChange = (event) => {
+    onChange(event.target.value)
+  }
 
   const isNotEmpty = (value) => value.trim() !== '';
 
@@ -10,8 +13,7 @@ function AddressForm({value}){
     value: countryValue,
     isValid: countryIsValid,
     hasError: countryHasError,
-    valueChangeHandler: countryChangeHandler,
-    inputBlurHandler: countryBlurHandler,
+     inputBlurHandler: countryBlurHandler,
     reset: resetCountry,
   } = useInput(isNotEmpty);
   const {
@@ -48,35 +50,30 @@ function AddressForm({value}){
   } = useInput(isNotEmpty);
   const {
     value: blockValue,
-    hasError: blockHasError,
     valueChangeHandler: blockChangeHandler,
     inputBlurHandler: blockBlurHandler,
     reset: resetBlock,
   } = useInput(isNotEmpty);
   const {
     value: entranceValue,
-    hasError: entranceHasError,
     valueChangeHandler: entranceChangeHandler,
     inputBlurHandler: entranceBlurHandler,
     reset: resetEntrance,
   } = useInput(isNotEmpty);
   const {
     value: floorValue,
-    hasError: floorHasError,
     valueChangeHandler: floorChangeHandler,
     inputBlurHandler: floorBlurHandler,
     reset: resetFloor,
   } = useInput(isNotEmpty);
   const {
     value: flatValue,
-    hasError: flatHasError,
     valueChangeHandler: flatChangeHandler,
     inputBlurHandler: flatBlurHandler,
     reset: resetFlat,
   } = useInput(isNotEmpty);
   const {
     value: intercomValue,
-    hasError: intercomHasError,
     valueChangeHandler: intercomChangeHandler,
     inputBlurHandler: intercomBlurHandler,
     reset: resetIntercom,
@@ -107,7 +104,7 @@ function AddressForm({value}){
   };
   return (
     <form 
-      onSubmit={submitHandler} 
+      onSubmit={submitHandler} onChange={handleChange}
     >
       <div>
         <div className={`${styles.formControl} ${countryHasError ? styles.invalid : ''}`}>
@@ -116,7 +113,7 @@ function AddressForm({value}){
             type='text'
             id='name'
             defaultValue={value?.data.country || countryValue}
-            onChange={countryChangeHandler}
+           // onChange={countryChangeHandler}
             onBlur={countryBlurHandler}
             //onFocus={countryFocusHandler}
             className={styles.formInput}
@@ -132,7 +129,7 @@ function AddressForm({value}){
             onBlur={cityBlurHandler}
             className={styles.formInput}
           />
-        </div>
+        </div> 
         <div className={`${styles.formControl} ${postalCodeHasError ? styles.invalid : ''}`}>
           <input
             placeholder="Индеск"
