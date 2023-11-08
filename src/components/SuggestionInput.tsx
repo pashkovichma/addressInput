@@ -37,8 +37,10 @@ function SuggestionInput() {
           containerClassName={styles.suggestionClassName}
         />
       </div>
-      {value && Object.entries(value.data).map(element => <AddressForm value={element} onChange={handleChange}/>})
-      //{value && <AddressForm value={value} onChange(handleChange)/>}
+      <button onClick={() => console.log(Object.entries(value!)[2][1])}> click</button>
+      {/*{value && <AddressForm value={Object.entries(value!)[2][1]} onChange={handleChange}/> }
+      {value && Object.entries(value![2]).map(element => <AddressForm value={element[2][1]} onChange={handleChange}/> )}
+      {value && <AddressForm value={value} onChange(handleChange)/>}*/}
     </div>
   );
 }

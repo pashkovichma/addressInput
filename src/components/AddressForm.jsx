@@ -2,7 +2,7 @@ import useInput from '../hooks/use-input';
 
 import styles from './AddressForm.module.css';
 
-function AddressForm({ value }, { onChange }) {
+function AddressForm({ value, onChange }) {
   const handleChange = (event) => {
     onChange(event.target.value)
   }
