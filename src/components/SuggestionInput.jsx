@@ -2,27 +2,32 @@ import { useEffect, useState } from 'react';
 import { AddressSuggestions, DaDataSuggestion, DaDataAddress } from 'react-dadata';
 
 import AddressForm from './AddressForm';
+import FinalForm from './FinalForm';
 import styles from './SuggestionInput.module.css';
+
 
 const DADATA_TOKEN = 'b945591e4801a017c5d7b499b33de1902684de8b';
 
 function SuggestionInput() {
-  const [value, setValue] = useState<DaDataSuggestion<DaDataAddress> | undefined>();
+  const [value, setValue] = useState();
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [showJson, setShowJson] = useState(false);
   
-  useEffect(() => {
-    console.log(value);
-  }, [value]);
-
-  const handleChange = (value:any) => {
-    setValue(value)
+  function handleChange(e) {
+    setValue(e.target.value)
   }
 
   if (!DADATA_TOKEN) {
     return <div className="App">Пожалуйста, установите ваш API токен для DaData в `/src/components/SuggestionInput.tsx:6`</div>;
   }
 
+  const refreshPage = ()=>{
+    window.location.reload();
+ }
+
   return (
     <div className={styles.container}>
+      {!value && 
       <div className={styles.wrapper}>
         <div className={styles.address}>
           <span>
@@ -30,17 +35,27 @@ function SuggestionInput() {
           </span>
         </div>
         <AddressSuggestions
-          token={DADATA_TOKEN!}
+          token={DADATA_TOKEN}
           inputProps={{ placeholder: "..."}}
           value={value}
           onChange={setValue}
           containerClassName={styles.suggestionClassName}
         />
       </div>
-      <button onClick={() => console.log(Object.entries(value!)[2][1])}> click</button>
-      {/*{value && <AddressForm value={Object.entries(value!)[2][1]} onChange={handleChange}/> }
-      {value && Object.entries(value![2]).map(element => <AddressForm value={element[2][1]} onChange={handleChange}/> )}
-      {value && <AddressForm value={value} onChange(handleChange)/>}*/}
+      }
+      {value && !showJson &&
+        <AddressForm 
+          value={value}
+          onChange={handleChange}
+          onShow={() => setShowJson(true)}
+        />
+      }
+      {showJson &&
+        <FinalForm
+        value={value}
+        reset={refreshPage}
+        />
+      }
     </div>
   );
 }

@@ -1,83 +1,82 @@
-import useInput from '../hooks/use-input';
-
 import styles from './AddressForm.module.css';
+import {useState} from 'react';
 
-function AddressForm({ value, onChange }) {
-  const handleChange = (event) => {
-    onChange(event.target.value)
-  }
+function AddressForm({ 
+  value, 
+  onChange,
+  onShow 
+}) {
 
-  const isNotEmpty = (value) => value.trim() !== '';
+  const [countryValue, setCountryValue] = useState((Object.entries(value)[2][1]).country);
+  const [cityValue, setCityValue] = useState((Object.entries(value)[2][1]).city);
+  const [postalCodeValue, setPostalCodeValue] = useState((Object.entries(value)[2][1]).postal_code);
+  const [streetValue, setStreetValue] = useState((Object.entries(value)[2][1]).street);
+  const [houseValue, setHouseValue] = useState((Object.entries(value)[2][1]).house);
+  const [blockValue, setBlockValue] = useState((Object.entries(value)[2][1]).block);
+  const [entranceValue, setEntranceValue] = useState((Object.entries(value)[2][1]).entrance);
+  const [floorValue, setFloorValue] = useState((Object.entries(value)[2][1]).floor);
+  const [flatValue, setFlatValue] = useState((Object.entries(value)[2][1]).flat);
+  const [intercomValue, setIntercomValue] = useState((Object.entries(value)[2][1]).intercom);
 
-  const {
-    value: countryValue,
-    isValid: countryIsValid,
-    hasError: countryHasError,
-     inputBlurHandler: countryBlurHandler,
-    reset: resetCountry,
-  } = useInput(isNotEmpty);
-  const {
-    value: cityValue,
-    isValid: cityIsValid,
-    hasError: cityHasError,
-    valueChangeHandler: cityChangeHandler,
-    inputBlurHandler: cityBlurHandler,
-    reset: resetCity,
-  } = useInput(isNotEmpty);
-  const {
-    value: postalCodeValue,
-    isValid: postalCodeIsValid,
-    hasError: postalCodeHasError,
-    valueChangeHandler: postalCodeChangeHandler,
-    inputBlurHandler: postalCodeBlurHandler,
-    reset: resetPostalCode,
-  } = useInput(isNotEmpty);
-  const {
-    value: streetValue,
-    isValid: streetIsValid,
-    hasError: streetHasError,
-    valueChangeHandler: streetChangeHandler,
-    inputBlurHandler: streetBlurHandler,
-    reset: resetStreet,
-  } = useInput(isNotEmpty);
-  const {
-    value: houseValue,
-    isValid: houseIsValid,
-    hasError: houseHasError,
-    valueChangeHandler: houseChangeHandler,
-    inputBlurHandler: houseBlurHandler,
-    reset: resetHouse,
-  } = useInput(isNotEmpty);
-  const {
-    value: blockValue,
-    valueChangeHandler: blockChangeHandler,
-    inputBlurHandler: blockBlurHandler,
-    reset: resetBlock,
-  } = useInput(isNotEmpty);
-  const {
-    value: entranceValue,
-    valueChangeHandler: entranceChangeHandler,
-    inputBlurHandler: entranceBlurHandler,
-    reset: resetEntrance,
-  } = useInput(isNotEmpty);
-  const {
-    value: floorValue,
-    valueChangeHandler: floorChangeHandler,
-    inputBlurHandler: floorBlurHandler,
-    reset: resetFloor,
-  } = useInput(isNotEmpty);
-  const {
-    value: flatValue,
-    valueChangeHandler: flatChangeHandler,
-    inputBlurHandler: flatBlurHandler,
-    reset: resetFlat,
-  } = useInput(isNotEmpty);
-  const {
-    value: intercomValue,
-    valueChangeHandler: intercomChangeHandler,
-    inputBlurHandler: intercomBlurHandler,
-    reset: resetIntercom,
-  } = useInput(isNotEmpty);
+  const [showForm, setShowForm] = useState(true);
+
+  const countryIsValid = countryValue ? countryValue.trim() !== '' : false;
+  const cityIsValid = cityValue ? cityValue.trim() !== '' : false;
+  const postalCodeIsValid = postalCodeValue ? postalCodeValue.trim() !== '' : false;
+  const streetIsValid = streetValue ? streetValue.trim() !== '' : false;
+  const houseIsValid = houseValue ? houseValue.trim() !== '' : false;
+
+  const countryInputChangeHandler = (event) => {
+    setCountryValue(event.target.value);
+    (Object.entries(value)[2][1]).country = event.target.value;
+  };
+
+  const cityInputChangeHandler = (event) => {
+    setCityValue(event.target.value);
+    (Object.entries(value)[2][1]).city = event.target.value;
+  };
+
+  const postalCodeInputChangeHandler = (event) => {
+    setPostalCodeValue(event.target.value);
+    (Object.entries(value)[2][1]).postal_code = event.target.value;
+  };
+
+  const streetInputChangeHandler = (event) => {
+    setStreetValue(event.target.value);
+    (Object.entries(value)[2][1]).street = event.target.value;
+  };
+
+  const houseInputChangeHandler = (event) => {
+    setHouseValue(event.target.value);
+    (Object.entries(value)[2][1]).house = event.target.value;
+  };
+
+  const blockInputChangeHandler = (event) => {
+    setBlockValue(event.target.value);
+    (Object.entries(value)[2][1]).block = event.target.value;
+  };
+
+  const entranceInputChangeHandler = (event) => {
+    setEntranceValue(event.target.value);
+    (Object.entries(value)[2][1]).entrance = event.target.value;
+  };
+
+  const floorInputChangeHandler = (event) => {
+    setFloorValue(event.target.value);
+    (Object.entries(value)[2][1]).floor = event.target.value;
+  };
+
+  const flatInputChangeHandler = (event) => {
+    setFlatValue(event.target.value);
+    (Object.entries(value)[2][1]).flat = event.target.value;
+  };
+
+  const intercomInputChangeHandler = (event) => {
+    setIntercomValue(event.target.value);
+    if ( !value.data.hasOwnProperty('intercom')) value.data.intercom = '';
+    (Object.entries(value)[2][1]).intercom = event.target.value;
+  };
+
   let formIsValid = false;
 
   if (countryIsValid && cityIsValid && postalCodeIsValid && streetIsValid && houseIsValid) {
@@ -90,140 +89,129 @@ function AddressForm({ value, onChange }) {
     if (!formIsValid) {
       return;
     }
+    onShow();
+  }
 
-    resetCountry();
-    resetCity();
-    resetPostalCode();
-    resetStreet();
-    resetHouse();
-    resetBlock();
-    resetEntrance();
-    resetFloor();
-    resetFlat();
-    resetIntercom();
-  };
+  const countryInputClasses = `${styles.formControl} ${countryIsValid ? '' : styles.invalid}`;
+  const cityInputClasses = `${styles.formControl} ${cityIsValid ? '' : styles.invalid}`;
+  const postalCodeInputClasses = `${styles.formControl} ${postalCodeIsValid ? '' : styles.invalid}`;
+  const streetInputClasses = `${styles.formControl} ${streetIsValid ? '' : styles.invalid}`;
+  const houseInputClasses = `${styles.formControl} ${houseIsValid ? '' : styles.invalid}`;
+
   return (
-    <form 
-      onSubmit={submitHandler} onChange={handleChange}
+    <form
+      onSubmit={submitHandler}
     >
       <div>
-        <div className={`${styles.formControl} ${countryHasError ? styles.invalid : ''}`}>
+        <div className={countryInputClasses}>
           <input
+            className={styles.formInput}
             placeholder="Страна"
             type='text'
-            id='name'
-            defaultValue={value?.data.country || countryValue}
-           // onChange={countryChangeHandler}
-            onBlur={countryBlurHandler}
-            //onFocus={countryFocusHandler}
-            className={styles.formInput}
+            id='country'
+            onChange={countryInputChangeHandler}
+            value={countryValue}
           />
         </div>
-        <div className={`${styles.formControl} ${cityHasError ? styles.invalid : ''}`}>
+        <div className={cityInputClasses}>
           <input
+            className={styles.formInput}
             placeholder="Город"
             type='text'
-            id='name'
-            defaultValue={value?.data.city || cityValue}
-            onChange={cityChangeHandler}
-            onBlur={cityBlurHandler}
-            className={styles.formInput}
-          />
-        </div> 
-        <div className={`${styles.formControl} ${postalCodeHasError ? styles.invalid : ''}`}>
-          <input
-            placeholder="Индеск"
-            type='text'
-            id='name'
-            defaultValue={value?.data.postal_code || postalCodeValue}
-            onChange={postalCodeChangeHandler}
-            onBlur={postalCodeBlurHandler}
-            className={styles.formInput}
+            id='city'
+            onChange={cityInputChangeHandler}
+            value={cityValue ? cityValue : ''}
           />
         </div>
-        <div className={`${styles.formControl} ${streetHasError ? styles.invalid : ''}`}>
+        <div className={postalCodeInputClasses}>
           <input
+            className={styles.formInput}
+            placeholder="Индекс"
+            type='text'
+            id='postalcode'
+            onChange={postalCodeInputChangeHandler}
+            value={postalCodeValue ? postalCodeValue : ''}
+          />
+        </div>
+        <div className={streetInputClasses}>
+          <input
+            className={styles.formInput}
             placeholder="Улица"
             type='text'
-            id='name'
-            defaultValue={value?.data.street || streetValue}
-            onChange={streetChangeHandler}
-            onBlur={streetBlurHandler}
-            className={styles.formInput}
+            id='street'
+            onChange={streetInputChangeHandler}
+            value={streetValue ? streetValue : ''}
           />
         </div>
-        <div className={`${styles.formControl} ${houseHasError ? styles.invalid : ''}`}>
+        <div className={houseInputClasses}>
           <input
+            className={styles.formInput}
             placeholder="Дом"
             type='text'
-            id='name'
-            defaultValue={value?.data.house || houseValue}
-            onChange={houseChangeHandler}
-            onBlur={houseBlurHandler}
-            className={styles.formInput}
+            id='house'
+            onChange={houseInputChangeHandler}
+            value={houseValue ? houseValue : ''}
           />
         </div>
         <div className={styles.formControl}>
           <input
-            placeholder="Корпус/ строение"
+            className={styles.formInput}
+            placeholder="Корпус"
             type='text'
-            id='name'
-            defaultValue={value?.data.block || blockValue}
-            onChange={blockChangeHandler}
-            onBlur={blockBlurHandler}
-            className={styles.formInput}
+            id='block'
+            onChange={blockInputChangeHandler}
+            value={blockValue ? blockValue : ''}
           />
         </div>
         <div className={styles.formControl}>
           <input
+            className={styles.formInput}
             placeholder="Подъезд"
             type='text'
-            id='name'
-            defaultValue={entranceValue}
-            onChange={entranceChangeHandler}
-            onBlur={entranceBlurHandler}
-            className={styles.formInput}
+            id='entrance'
+            onChange={entranceInputChangeHandler}
+            value={entranceValue ? entranceValue : ''}
           />
         </div>
         <div className={styles.formControl}>
           <input
+            className={styles.formInput}
             placeholder="Этаж"
             type='text'
-            id='name'
-            defaultValue={floorValue}
-            onChange={floorChangeHandler}
-            onBlur={floorBlurHandler}
-            className={styles.formInput}
+            id='floor'
+            onChange={floorInputChangeHandler}
+            value={floorValue ? floorValue : ''}
           />
         </div>
         <div className={styles.formControl}>
           <input
+            className={styles.formInput}
             placeholder="Квартира"
             type='text'
-            id='name'
-            defaultValue={value?.data.flat || flatValue}
-            onChange={flatChangeHandler}
-            onBlur={flatBlurHandler}
-            className={styles.formInput}
+            id='flat'
+            onChange={flatInputChangeHandler}
+            value={flatValue ? flatValue : ''}
           />
         </div>
         <div className={styles.formControl}>
-          <input
-            placeholder="Домофон"
-            type='text'
-            id='name'
-            defaultValue={intercomValue}
-            onChange={intercomChangeHandler}
-            onBlur={intercomBlurHandler}
-            className={styles.formInput}
-          />
+            <input
+              className={styles.formInput}
+              placeholder="Домофон"
+              type='text'
+              id='intercom'
+              onChange={intercomInputChangeHandler}
+              value={intercomValue ? intercomValue : ''}
+            />
         </div>
       </div>
-      <div>
-        <button disabled={!formIsValid}>Submit</button>
-      </div>
+      <button
+        className={styles.button}
+        disabled={!formIsValid}
+      >
+        Tекущий стейт
+      </button>
     </form>
   );
-} 
+}
 
 export default AddressForm;

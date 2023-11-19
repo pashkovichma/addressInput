@@ -2,6 +2,7 @@ import { useReducer } from 'react';
 
 const initialInputState = {
   value: '',
+  isTouched: false,
 };
 
 const inputStateReducer = (state, action) => {
@@ -17,11 +18,12 @@ const inputStateReducer = (state, action) => {
   return state;
 };
 
-const useInput = (validateValue) => {
+function useInput(validateValue) {
 
   const [inputState, dispatch] = useReducer(
     inputStateReducer,
     initialInputState
+    // initialValue
   );
 
   const valueIsValid = validateValue(inputState.value);

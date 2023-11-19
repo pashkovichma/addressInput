@@ -1,6 +1,8 @@
 .formControl {
   max-width: 70%;
   position: relative;
+  line-height: 22px;
+  font-size: 1.125rem;
 }
 
 .invalid input {
@@ -16,4 +18,23 @@
   box-shadow: 0 0 0 0;
   padding-left: 15px;
   margin: 5px;
+  border-style: solid;
+  padding: 4px 15px;
+}
+
+.button {
+  transition-duration: .25s;
+  color: rgb(255 255 255);
+  text-transform: uppercase;
+  font-weight: 600;
+  background-color: rgb(20 20 20);
+  border-color: rgb(20 20 20);
+  border-radius: 32px;
+  border-style: solid;
+  padding: 16px 32px;
+}
+
+.button:disabled {
+  background-color: grey;
+  border-color: grey;
 }
