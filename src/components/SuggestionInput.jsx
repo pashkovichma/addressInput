@@ -1,16 +1,14 @@
-import { useEffect, useState } from 'react';
-import { AddressSuggestions, DaDataSuggestion, DaDataAddress } from 'react-dadata';
+import { useState } from 'react';
+import { AddressSuggestions} from 'react-dadata';
 
 import AddressForm from './AddressForm';
 import FinalForm from './FinalForm';
 import styles from './SuggestionInput.module.css';
 
-
 const DADATA_TOKEN = 'b945591e4801a017c5d7b499b33de1902684de8b';
 
 function SuggestionInput() {
   const [value, setValue] = useState();
-  const [activeIndex, setActiveIndex] = useState(0);
   const [showJson, setShowJson] = useState(false);
   
   function handleChange(e) {
