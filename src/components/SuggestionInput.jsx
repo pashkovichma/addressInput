@@ -10,10 +10,6 @@ const DADATA_TOKEN = 'b945591e4801a017c5d7b499b33de1902684de8b';
 function SuggestionInput() {
   const [value, setValue] = useState();
   const [showJson, setShowJson] = useState(false);
-  
-  function handleChange(e) {
-    setValue(e.target.value)
-  }
 
   if (!DADATA_TOKEN) {
     return <div className="App">Пожалуйста, установите ваш API токен для DaData в `/src/components/SuggestionInput.tsx:6`</div>;
@@ -44,7 +40,6 @@ function SuggestionInput() {
       {value && !showJson &&
         <AddressForm 
           value={value}
-          onChange={handleChange}
           onShow={() => setShowJson(true)}
         />
       }

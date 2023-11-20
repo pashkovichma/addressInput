@@ -3,7 +3,6 @@ import {useState} from 'react';
 
 function AddressForm({ 
   value, 
-  onChange,
   onShow 
 }) {
 
@@ -17,8 +16,6 @@ function AddressForm({
   const [floorValue, setFloorValue] = useState((Object.entries(value)[2][1]).floor);
   const [flatValue, setFlatValue] = useState((Object.entries(value)[2][1]).flat);
   const [intercomValue, setIntercomValue] = useState((Object.entries(value)[2][1]).intercom);
-
-  const [showForm, setShowForm] = useState(true);
 
   const countryIsValid = countryValue ? countryValue.trim() !== '' : false;
   const cityIsValid = cityValue ? cityValue.trim() !== '' : false;
