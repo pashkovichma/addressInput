@@ -3,31 +3,26 @@ import styles from './SuggestionInput.module.css';
 function FinalForm({
   value,
   reset
-}){
+}) {
+  const state = (Object.entries(value.data));
+
   return (
     <>
-      <div className={styles.wrapper}>
-        <div className={styles.address}>
-          <span>
-            country
+      {state.map(field =>
+        <div
+          className={styles.wrapper}
+          key={field[0]}
+        >
+          <div className={styles.address}>
+            <span>
+              {field[0]}
+            </span>
+          </div>
+          <span className={styles.suggestionClassName}>
+            {field[1]===null ? 'null' : field[1]}
           </span>
         </div>
-        <input
-          className={styles.suggestionClassName}
-          defaultValue={value.data.country}
-        />
-      </div>
-      <div className={styles.wrapper}>
-        <div className={styles.address}>
-          <span>
-            country
-          </span>
-        </div>
-        <input
-          className={styles.suggestionClassName}
-          defaultValue={value.data.country}
-        />
-      </div>
+      )}
       <div>
         <button
         onClick={reset}
