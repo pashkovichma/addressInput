@@ -5,7 +5,6 @@ function AddressForm({
   value, 
   onShow 
 }) {
-
   const [countryValue, setCountryValue] = useState((Object.entries(value)[2][1]).country);
   const [cityValue, setCityValue] = useState((Object.entries(value)[2][1]).city);
   const [postalCodeValue, setPostalCodeValue] = useState((Object.entries(value)[2][1]).postal_code);
@@ -17,55 +16,28 @@ function AddressForm({
   const [flatValue, setFlatValue] = useState((Object.entries(value)[2][1]).flat);
   const [intercomValue, setIntercomValue] = useState((Object.entries(value)[2][1]).intercom);
 
+  const allSetters = {
+    country: setCountryValue,
+    city: setCityValue,
+    postal_code: setPostalCodeValue,
+    street: setStreetValue,
+    house: setHouseValue,
+    block: setBlockValue,
+    entrance: setEntranceValue,
+    floor: setFloorValue,
+    flat: setFlatValue,
+    intercom: setIntercomValue,
+  }
+
   const countryIsValid = countryValue ? countryValue.trim() !== '' : false;
   const cityIsValid = cityValue ? cityValue.trim() !== '' : false;
   const postalCodeIsValid = postalCodeValue ? postalCodeValue.trim() !== '' : false;
   const streetIsValid = streetValue ? streetValue.trim() !== '' : false;
   const houseIsValid = houseValue ? houseValue.trim() !== '' : false;
 
-  const countryInputChangeHandler = (event) => {
-    setCountryValue(event.target.value);
-    (Object.entries(value)[2][1]).country = event.target.value;
-  };
-
-  const cityInputChangeHandler = (event) => {
-    setCityValue(event.target.value);
-    (Object.entries(value)[2][1]).city = event.target.value;
-  };
-
-  const postalCodeInputChangeHandler = (event) => {
-    setPostalCodeValue(event.target.value);
-    (Object.entries(value)[2][1]).postal_code = event.target.value;
-  };
-
-  const streetInputChangeHandler = (event) => {
-    setStreetValue(event.target.value);
-    (Object.entries(value)[2][1]).street = event.target.value;
-  };
-
-  const houseInputChangeHandler = (event) => {
-    setHouseValue(event.target.value);
-    (Object.entries(value)[2][1]).house = event.target.value;
-  };
-
-  const blockInputChangeHandler = (event) => {
-    setBlockValue(event.target.value);
-    (Object.entries(value)[2][1]).block = event.target.value;
-  };
-
-  const entranceInputChangeHandler = (event) => {
-    setEntranceValue(event.target.value);
-    (Object.entries(value)[2][1]).entrance = event.target.value;
-  };
-
-  const floorInputChangeHandler = (event) => {
-    setFloorValue(event.target.value);
-    (Object.entries(value)[2][1]).floor = event.target.value;
-  };
-
-  const flatInputChangeHandler = (event) => {
-    setFlatValue(event.target.value);
-    (Object.entries(value)[2][1]).flat = event.target.value;
+  const inputChangeHandler = (event, name) => {
+    allSetters[name](event.target.value);
+    (Object.entries(value)[2][1])[name] = event.target.value;
   };
 
   const intercomInputChangeHandler = (event) => {
@@ -106,7 +78,7 @@ function AddressForm({
             placeholder="Страна"
             type='text'
             id='country'
-            onChange={countryInputChangeHandler}
+            onChange={event => inputChangeHandler(event, 'country')}
             value={countryValue}
           />
         </div>
@@ -116,7 +88,7 @@ function AddressForm({
             placeholder="Город"
             type='text'
             id='city'
-            onChange={cityInputChangeHandler}
+            onChange={event => inputChangeHandler(event, 'city')}
             value={cityValue ? cityValue : ''}
           />
         </div>
@@ -126,7 +98,7 @@ function AddressForm({
             placeholder="Индекс"
             type='text'
             id='postalcode'
-            onChange={postalCodeInputChangeHandler}
+            onChange={event => inputChangeHandler(event, 'postal_code')}
             value={postalCodeValue ? postalCodeValue : ''}
           />
         </div>
@@ -136,7 +108,7 @@ function AddressForm({
             placeholder="Улица"
             type='text'
             id='street'
-            onChange={streetInputChangeHandler}
+            onChange={event => inputChangeHandler(event, 'street')}
             value={streetValue ? streetValue : ''}
           />
         </div>
@@ -146,7 +118,7 @@ function AddressForm({
             placeholder="Дом"
             type='text'
             id='house'
-            onChange={houseInputChangeHandler}
+            onChange={event => inputChangeHandler(event, 'house')}
             value={houseValue ? houseValue : ''}
           />
         </div>
@@ -156,7 +128,7 @@ function AddressForm({
             placeholder="Корпус"
             type='text'
             id='block'
-            onChange={blockInputChangeHandler}
+            onChange={event => inputChangeHandler(event, 'block')}
             value={blockValue ? blockValue : ''}
           />
         </div>
@@ -166,7 +138,7 @@ function AddressForm({
             placeholder="Подъезд"
             type='text'
             id='entrance'
-            onChange={entranceInputChangeHandler}
+            onChange={event => inputChangeHandler(event, 'entrance')}
             value={entranceValue ? entranceValue : ''}
           />
         </div>
@@ -176,7 +148,7 @@ function AddressForm({
             placeholder="Этаж"
             type='text'
             id='floor'
-            onChange={floorInputChangeHandler}
+            onChange={event => inputChangeHandler(event, 'floor')}
             value={floorValue ? floorValue : ''}
           />
         </div>
@@ -186,7 +158,7 @@ function AddressForm({
             placeholder="Квартира"
             type='text'
             id='flat'
-            onChange={flatInputChangeHandler}
+            onChange={event => inputChangeHandler(event, 'flat')}
             value={flatValue ? flatValue : ''}
           />
         </div>
